@@ -1,6 +1,6 @@
 import './App.css';
 import { useTheme } from './providers/Theme/';
-import { CheckboxList } from './components/';
+import { CheckboxList, Grid, Row, Cell } from './components/';
 import { useState } from 'react';
 
 type Color = {
@@ -30,7 +30,6 @@ function App() {
 
       <div className='flex flex-col gap-4'>
         <CheckboxList
-        classNames={{ container: 'bg-' }}
         htmlFor='color'
         list={colors}
         select={setColors}
@@ -39,17 +38,25 @@ function App() {
         stateful
         />
         <CheckboxList
-        classNames={{ overwriteContainer: 'flex bg-red-400', overwriteItem: 'text-blue-300' }}
+        classNames={{ overwriteContainer: 'flex bg-red-100 gap-4 w-max p-4' }}
         onChange={(prev, curr, item) => console.log({prev, curr, item})}
         htmlFor='color'
         list={colors}
         renderItemAs={(item) => {
           return (
-            <div>{item.name}</div>  
+            <div className='text-blue-500'>{item.name}</div>  
           );
         }}
         />
       </div>
+      <Grid>
+        <Row id={1}>
+          <Cell id={1} isleId={1}>this</Cell>
+          <Cell id={2} isleId={1}>is</Cell>
+          <Cell id={3} isleId={1}>an</Cell>
+          <Cell id={4} isleId={1}>isle</Cell>
+        </Row>
+      </Grid>
     </div>
   );
 }
