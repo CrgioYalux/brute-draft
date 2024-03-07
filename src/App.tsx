@@ -1,6 +1,6 @@
 import './App.css';
 import { useTheme } from './providers/Theme/';
-import { CheckboxList, Grid, Row, Cell } from './components/';
+import { TextInput, PasswordInput, Grid, Row, Cell, CheckboxList } from './components/';
 import { useState } from 'react';
 
 type Color = {
@@ -22,6 +22,8 @@ function App() {
       id: 2, name: 'green', selected: false, 
     },
   ]);
+  const [input, setInput] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   return (
     <div className='min-h-screen bg-gray-200 dark:bg-gray-900'>
@@ -57,6 +59,15 @@ function App() {
           <Cell id={4} isleId={1}>isle</Cell>
         </Row>
       </Grid>
+      <TextInput text={input} setText={setInput} onlyLetters allowSpaces variant='success' />
+      <PasswordInput 
+      password={password}
+      setPassword={setPassword}
+      label='Password here:'
+      variant={password.length === 0 ? 'error' : 'success'}
+      classNames={{ input: 'transition' }}
+      placeholder='very difficult password'
+      />
     </div>
   );
 }
