@@ -36,7 +36,7 @@ const defaultClassNames = (variant: Variant) => ({
 
 interface PasswordInputProps extends BruteComponentProps<HTMLInputElement> {
 	classNames?: ClassNames<['label', 'span', 'div', 'input', 'button']>;
-	label?: string;
+	label?: React.ReactNode;
 	variant?: Variant;
 	password: string;
 	setPassword: (prev: string) => void;

@@ -38,7 +38,7 @@ const defaultClassNames = (variant: Variant) => ({
 
 interface TextInputProps extends BruteComponentProps<HTMLInputElement> {
 	classNames?: ClassNames<['label', 'span', 'input']>;
-	label?: string;
+	label?: React.ReactNode;
 	variant?: Variant;
     onlyLetters?: boolean;
     onlyNumbers?: boolean;
