@@ -36,8 +36,10 @@ const defaultClassNames = (variant: Variant) => ({
 	button: `w-max ${colorsByVariant[variant].button} underline cursor-pointer`,
 });
 
-interface TextInputProps extends BruteComponentProps<HTMLInputElement> {
-	classNames?: ClassNames<['label', 'span', 'input']>;
+interface TextInputProps extends BruteComponent<
+	HTMLInputElement,
+	['label', 'span', 'input']
+> {
 	label?: React.ReactNode;
 	variant?: Variant;
     onlyLetters?: boolean;

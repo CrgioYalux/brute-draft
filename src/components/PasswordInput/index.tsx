@@ -34,20 +34,22 @@ const defaultClassNames = (variant: Variant) => ({
 	button: `grow-0 shrink-0 basis-8 grid place-items-center fill-current ${colorsByVariant[variant].button}`,
 });
 
-interface PasswordInputProps extends BruteComponentProps<HTMLInputElement> {
-	classNames?: ClassNames<['label', 'span', 'div', 'input', 'button']>;
+interface PasswordInputProps extends BruteComponent<
+	HTMLInputElement,
+	['label', 'span', 'div', 'input', 'button']
+> {
 	label?: React.ReactNode;
 	variant?: Variant;
-	password: string;
 	setPassword: (prev: string) => void;
+	password: string;
 };
 
 const PasswordInput: React.FC<PasswordInputProps> = ({
 	classNames,
 	label = 'Password',
 	variant = 'initial',
-	password,
 	setPassword,
+	password,
 	...inputProps
 }) => {
 	const [inputType, setInputType] = useState('password');

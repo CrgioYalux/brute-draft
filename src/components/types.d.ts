@@ -17,7 +17,7 @@ type RemoveField<Type, Field extends string> = {
 
 type ClassName<T extends string> = T | `overwrite${UppercaseFirstLetter<T>}`;
 
-type ClassNames<T extends string[]> = {
+type BruteClassNames<T extends string[]> = {
     [K in ClassName<T[number]>]?: string;
 };
 
@@ -29,9 +29,9 @@ type MinimumItemProps = {
 const Variants = ['initial', 'success', 'error', 'warning'] as const;
 type Variant = typeof Variants[number];
 
-type BruteComponentProps<HTMLElement> = RemoveField<
+type BruteComponent<HTMLElement, ClassNames extends string[]> = RemoveField<
     React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLElement>, HTMLElement>,
     'className'
->;
+> & { classNames?: BruteClassNames<ClassNames> };
 
 type SVGIconComponent = React.FC<{ className?: string }>;
