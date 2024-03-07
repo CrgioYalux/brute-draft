@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import { isIncludedIn } from '../utils';
 
-const colorsByVariant: { [Key in Variant]: { span: string; input: string; button: string } } = {
+const colorSchemes: ColorSchemesByVariant<['span', 'input', 'button']> = {
 	initial: {
 		span: 'text-black dark:text-white',
 		input: 'bg-indigo-800 dark:bg-indigo-200 text-indigo-200 dark:text-indigo-800',
@@ -31,9 +31,9 @@ const spaces = ' ';
 
 const defaultClassNames = (variant: Variant) => ({
 	label: 'flex items-center gap-2',
-	span: `flex-none grow-0 min-w-max ${colorsByVariant[variant].span}`,
-	input: `flex-none rounded p-1 ${colorsByVariant[variant].input}`,
-	button: `w-max ${colorsByVariant[variant].button} underline cursor-pointer`,
+	span: `flex-none grow-0 min-w-max ${colorSchemes[variant].span}`,
+	input: `flex-none rounded p-1 ${colorSchemes[variant].input}`,
+	button: `w-max ${colorSchemes[variant].button} underline cursor-pointer`,
 });
 
 interface TextInputProps extends BruteComponent<

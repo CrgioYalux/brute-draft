@@ -3,7 +3,7 @@ import { useState, useId } from 'react';
 import OpenEye from '../Icons/OpenEye';
 import ClosedEye from '../Icons/ClosedEye';
 
-const colorsByVariant: { [Key in Variant]: { span: string; input: string; button: string } } = {
+const colorSchemes: ColorSchemesByVariant<['span', 'input', 'button']> = {
 	initial: {
 		span: 'text-black dark:text-white',
 		input: 'bg-indigo-800 dark:bg-indigo-200 text-indigo-200 dark:text-indigo-800',
@@ -28,10 +28,10 @@ const colorsByVariant: { [Key in Variant]: { span: string; input: string; button
 
 const defaultClassNames = (variant: Variant) => ({
 	label: 'flex items-center gap-2 w-96',
-	span: `flex-none grow-0 min-w-max ${colorsByVariant[variant].span}`,
+	span: `flex-none grow-0 min-w-max ${colorSchemes[variant].span}`,
 	div: 'grow shrink basis-full flex gap-1 ml-auto',
-	input: `flex-none w-[24ch] rounded p-1 ${colorsByVariant[variant].input}`,
-	button: `grow-0 shrink-0 basis-8 grid place-items-center fill-current ${colorsByVariant[variant].button}`,
+	input: `flex-none w-[24ch] rounded p-1 ${colorSchemes[variant].input}`,
+	button: `grow-0 shrink-0 basis-8 grid place-items-center fill-current ${colorSchemes[variant].button}`,
 });
 
 interface PasswordInputProps extends BruteComponent<

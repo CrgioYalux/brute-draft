@@ -34,4 +34,6 @@ type BruteComponent<HTMLElement, ClassNames extends string[]> = RemoveField<
     'className'
 > & { classNames?: BruteClassNames<ClassNames> };
 
+type ColorSchemesByVariant<Elements extends string[]> = { [Key in Variant]: { [K in Elements[number]]: string; } };
+
 type SVGIconComponent = React.FC<{ className?: string }>;
