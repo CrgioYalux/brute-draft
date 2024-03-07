@@ -36,9 +36,7 @@ const defaultClassNames = (variant: Variant) => ({
 	button: `w-max ${colorsByVariant[variant].button} underline cursor-pointer`,
 });
 
-interface TextInputProps extends React.DetailedHTMLProps<
-	React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement
-> {
+interface TextInputProps extends BruteComponentProps<HTMLInputElement> {
 	classNames?: ClassNames<['label', 'span', 'input']>;
 	label?: string;
 	variant?: Variant;
@@ -56,8 +54,8 @@ interface TextInputProps extends React.DetailedHTMLProps<
 	text: string;
 };
 
-const TextInput: React.FC<TextInputProps> = ({ 
-	classNames = {},
+const TextInput: React.FC<TextInputProps> = ({
+	classNames,
 	label = 'Text',
 	variant = 'initial',
     onlyLetters = false,
@@ -70,15 +68,15 @@ const TextInput: React.FC<TextInputProps> = ({
     allowSymbols = true && (!onlyLetters && !onlyNumbers && !onlySpaces),
     allowSpaces = true && (!onlyLetters && !onlyNumbers && !onlySymbols),
     allow = '',
-	setText = () => {},
-	text = '',
-	...inputProps 
+	setText,
+	text,
+	...inputProps
 }) => {
 	const id = useId();
 
-	const labelClassName = classNames.overwriteLabel ?? `${defaultClassNames(variant).label} ${classNames.label ?? ''}`;
-	const spanClassName = classNames.overwriteSpan ?? `${defaultClassNames(variant).span} ${classNames.span ?? ''}`;
-	const inputClassName = classNames.overwriteInput ?? `${defaultClassNames(variant).input} ${classNames.input ?? ''}`;
+	const labelClassName = classNames?.overwriteLabel ?? `${defaultClassNames(variant).label} ${classNames?.label ?? ''}`;
+	const spanClassName = classNames?.overwriteSpan ?? `${defaultClassNames(variant).span} ${classNames?.span ?? ''}`;
+	const inputClassName = classNames?.overwriteInput ?? `${defaultClassNames(variant).input} ${classNames?.input ?? ''}`;
 
 	return (
 		<label className={labelClassName} htmlFor={id}>
