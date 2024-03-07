@@ -14,7 +14,9 @@ type UppercaseFirstLetter<S extends string> =
 
 type ClassName<T extends string> = T | `overwrite${UppercaseFirstLetter<T>}`;
 
-
 type ClassNames<T extends string[]> = {
     [K in ClassName<T[number]>]?: string;
 };
+
+const Variants = ['initial', 'success', 'error', 'warning'] as const;
+type Variant = typeof Variants[number];

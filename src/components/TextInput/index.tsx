@@ -1,9 +1,7 @@
 import { useId } from 'react';
+import { isIncludedIn } from '../utils';
 
-const Variants = ['default', 'success', 'error', 'warning'];
-type Variant = typeof Variants[number];
-
-const colorsByVariant: { [key: Variant]: { span: string; input: string; button: string } } = {
+const colorsByVariant: { [Key in Variant]: { span: string; input: string; button: string } } = {
 	initial: {
 		span: 'text-black dark:text-white',
 		input: 'bg-indigo-800 dark:bg-indigo-200 text-indigo-200 dark:text-indigo-800',
@@ -26,7 +24,10 @@ const colorsByVariant: { [key: Variant]: { span: string; input: string; button: 
 	},
 };
 
-const isIncludedIn = <T, >(list: T[] = []) => (v: T): boolean => list.includes(v);
+const letters = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
+const numbers = '0123456789';
+const symbols = '"¡!#$%&\'()*+,-./:;<=>¿?@[\\]^_`{|}~';
+const spaces = ' ';
 
 const defaultClassNames = (variant: Variant) => ({
 	label: 'flex items-center gap-2',
@@ -34,11 +35,6 @@ const defaultClassNames = (variant: Variant) => ({
 	input: `flex-none rounded p-1 ${colorsByVariant[variant].input}`,
 	button: `w-max ${colorsByVariant[variant].button} underline cursor-pointer`,
 });
-
-const letters = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
-const numbers = '0123456789';
-const symbols = '"¡!#$%&\'()*+,-./:;<=>¿?@[\\]^_`{|}~';
-const spaces = ' ';
 
 interface TextInputProps extends React.DetailedHTMLProps<
 	React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement
@@ -80,9 +76,9 @@ const TextInput: React.FC<TextInputProps> = ({
 }) => {
 	const id = useId();
 
-	const labelClassName = classNames.overwriteLabel ?? `${defaultClassNames(variant)?.label} ${classNames.label ?? ''}`;
-	const spanClassName = classNames.overwriteSpan ?? `${defaultClassNames(variant)?.span} ${classNames.span ?? ''}`;
-	const inputClassName = classNames.overwriteInput ?? `${defaultClassNames(variant)?.input} ${classNames.input ?? ''}`;
+	const labelClassName = classNames.overwriteLabel ?? `${defaultClassNames(variant).label} ${classNames.label ?? ''}`;
+	const spanClassName = classNames.overwriteSpan ?? `${defaultClassNames(variant).span} ${classNames.span ?? ''}`;
+	const inputClassName = classNames.overwriteInput ?? `${defaultClassNames(variant).input} ${classNames.input ?? ''}`;
 
 	return (
 		<label className={labelClassName} htmlFor={id}>
