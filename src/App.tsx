@@ -52,11 +52,17 @@ function App() {
         />
       </div>
       <Grid>
-        <Row id={1}>
-          <Cell id={1} isleId={1}>this</Cell>
-          <Cell id={2} isleId={1}>is</Cell>
-          <Cell id={3} isleId={1}>an</Cell>
-          <Cell id={4} isleId={1}>isle</Cell>
+        <Row>
+          <Cell isleId={1}>this</Cell>
+          <Cell isleId={1}>is</Cell>
+          <Cell isleId={1}>an</Cell>
+          <Cell isleId={1}>isle</Cell>
+        </Row>
+        <Row>
+          <Cell isleId={2}>this</Cell>
+          <Cell isleId={2}>is</Cell>
+          <Cell isleId={2}>another</Cell>
+          <Cell isleId={2}>isle</Cell>
         </Row>
       </Grid>
       <TextInput text={input} setText={setInput} onlyLetters allowSpaces variant='success' />

@@ -52,3 +52,32 @@
 - Parent receives its children and modifies them before rendering adding their identifiable props
   - For this use the [Children API](https://react.dev/reference/react/Children)
   - [useLayoutEffect](https://react.dev/reference/react/useLayoutEffect) could be useful too
+- There's Internal and External versions for the Row and Cell components
+  - The External is provided to the user to define the visual structure
+  - Each parent (Grid and Row) takes its children, passed in their External version, maps them to extract the passed props into a list state, and finally renders their equivalent using the Internal version.
+  I.E.
+  ```react
+    // the user describes
+    <Grid>
+      <Row>
+        <Cell isleId={1}>A</Cell>
+        <Cell isleId={2}>B</Cell>
+      </Row>
+      <Row>
+        <Cell isleId={1}>A</Cell>
+        <Cell isleId={3}>D</Cell>
+      </Row>
+    </Grid>
+    // and what ends up rendering is
+    <Grid>
+      <InternalRow id={0}>
+        <InternalCell id={0} isleId={1}>A</InternalCell>
+        <InternalCell id={1} isleId={2}>B</InternalCell>
+      </InternalRow>
+      <InternalRow id={1}>
+        <InternalCell id={0} isleId={3}>A</InternalCell>
+        <InternalCell id={1} isleId={3}>D</InternalCell>
+      </InternalRow>
+    </Grid>
+    // and are the Internal versions the ones actually handling logic
+  ```

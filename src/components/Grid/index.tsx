@@ -1,135 +1,153 @@
-import { createContext, useContext, useState, useEffect, useRef } from 'react';
+import { 
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useLayoutEffect,
+  Children,
+} from 'react';
+
+interface CellProps {
+  children?: React.ReactNode;
+  isleId: number;
+};
+
+function Cell({
+  children,
+}: CellProps): React.ReactNode {
+
+  return (
+    <div>{children}</div>
+  ); 
+}
+
+interface RowProps {
+  children?: React.ReactNode;
+};
+
+function Row({
+  children,
+}: RowProps): React.ReactNode {
+
+  return (
+    <RowContext.Provider value={{}}>
+      <div className='flex flex-row gap-2'>
+        {children}
+      </div>
+    </RowContext.Provider>
+  );
+}
+
+interface RowContext {};
+const RowContext = createContext<RowContext>({} as RowContext);
+const useRowContextProvider = (): RowContext => useContext(RowContext);
+
+interface GridContext {};
+const GridContext = createContext<GridContext>({} as GridContext);
+const useGridContextProvider = (): GridContext => useContext(GridContext);
+
+interface InternalCellProps extends CellProps {
+  id: number;
+  key: number;
+};
+
+function InternalCell({
+  id,
+  children,
+}: InternalCellProps): React.ReactNode {
+  const rowContext = useRowContextProvider();
+
+  return (
+    <div className='flex-1 bg-blue-500 text-center'>
+      {children}
+    </div>
+  );
+}
+
+interface InternalRowProps extends RowProps {
+  id: number;
+  key: number;
+};
+
+function InternalRow({
+  id,
+  children,
+}: InternalRowProps): React.ReactNode {
+  const gridContext = useGridContextProvider();
+
+  const [didChildrenRender, setDidChildrenRender] = useState<boolean>(false);
+  const [cells, setCells] = useState<InternalCellProps[]>([]);
+
+  useEffect(() => {
+    if (!didChildrenRender)
+      setDidChildrenRender(true);
+  }, [children]);
+
+  useLayoutEffect(() => {
+    if (didChildrenRender) {
+      Children.forEach(children, (child, index) => {
+        const cell = child as React.ReactElement<CellProps>;
+
+        setCells(
+          (prev) => prev.findIndex(v => v.id === index) === -1 
+            ? [
+                ...prev,
+                { ...cell.props, id: index, key: index, }
+              ]
+            : prev
+        );
+      });
+    }
+  }, [didChildrenRender]);
+
+  return (
+    <RowContext.Provider value={{}}>
+      <div className='flex w-full gap-2'>
+        {cells.map(v => <InternalCell {...v} />)}
+      </div>
+    </RowContext.Provider>
+  );
+}
 
 interface GridProps {
   children: React.ReactNode;
 };
 
-interface RowProps {
-  children?: React.ReactNode;
-  id: number;
-};
-
-interface CellProps {
-  children?: React.ReactNode;
-  isleId: number;
-  id: number;
-};
-
-type CellT = {
-  position: {
-    x: number;
-    y: number;
-  };
-  isleId: number;
-  cellId: number;
-};
-type RowT = {
-  rowId: number;
-  cells: CellT[];
-};
-type GridT = RowT[];
-
-interface GridContext {
-  addRow: (rowId: number) => void;
-  isRowAdded: (rowId: number) => boolean;
-  updateRow: (rowId: number, cells: CellT[]) => void;
-};
-const GridContext = createContext<GridContext>({} as GridContext);
-const useGridContextProvider = (): GridContext => useContext(GridContext);
-
-interface RowContext {
-  addCell: (cellId: number, isleId: number) => void;
-  isCellAdded: (cellId: number) => boolean;
-};
-const RowContext = createContext<RowContext>({} as RowContext);
-const useRowContextProvider = (): RowContext => useContext(RowContext);
-
-function Cell({
-  children,
-  isleId, // join cells together
-  id, // identifies a cell
-}: CellProps): React.ReactNode {
-  const rowContext = useRowContextProvider();
-
-  useEffect(() => {
-    rowContext.addCell(id, isleId);
-    // subscribe to row
-  }, []);
-
-  return (
-    <div>{children}</div>
-  );
-}
-
-function Row({
-  children,
-  id,
-}: RowProps): React.ReactNode {
-  const gridContext = useGridContextProvider();
-  const cells = useRef<Map<number, CellT>>(new Map());
-  // const [cells, setCells] = useState<CellT[]>([]);
-
-  useEffect(() => {
-    if (!gridContext.isRowAdded(id)) {
-      gridContext.addRow(id);
-    }
-    // subscribe to grid
-  }, []);
-
-  const addCell = (cellId: number, isleId: number): void => {
-    // const change = [...cells, { cellId, isleId, position: { x: 0, y: cellId } }]; // x could be provided for the the grid
-    // setCells(() => change);
-    cells.current.set(cellId, { cellId, isleId, position: { x: 0, y: cellId } });
-    gridContext.updateRow(id, Array.from(cells.current.values()));
-  };
-
-  const isCellAdded = (cellId: number): boolean => {
-    return cells.current.has(cellId);
-  };
-
-  return (
-    <RowContext.Provider value={{ addCell, isCellAdded, }}>
-      {children}
-    </RowContext.Provider>
-  );
-}
-
 function Grid({
   children,
 }: GridProps): React.ReactNode {
+  const [didChildrenRender, setDidChildrenRender] = useState<boolean>(false);
+  const [rows, setRows] = useState<InternalRowProps[]>([]);
 
-  const grid = useRef<Map<number, CellT[]>>(new Map());
-  // const [grid, setGrid] = useState<GridT>([]);
+  useEffect(() => {
+    if (!didChildrenRender)
+      setDidChildrenRender(true);
+  }, [children]);
 
-  const addRow = (rowId: number): void => {
-    // setGrid((prev) => ([ ...prev, { rowId, cells: [] } ]));
-    grid.current.set(rowId, []);
-    console.log({ added: true, grid });
-  };
+  useLayoutEffect(() => {
+    if (didChildrenRender) {
+      Children.forEach(children, (child, index) => {
+        const row = child as React.ReactElement<RowProps>;
 
-  const isRowAdded = (rowId: number): boolean => {
-    return grid.current.has(rowId);
-  };
-
-  const updateRow = (rowId: number, cells: CellT[]): void => {
-    // setGrid((prev) => prev.map((r) => r.rowId === rowId ? ({ ...r, cells }) : r ));
-    grid.current.set(rowId, cells);
-    console.log({ updated: true, grid });
-  };
+        setRows(
+          (prev) => prev.findIndex(v => v.id === index) === -1 
+            ? [
+                ...prev,
+                { ...row.props, id: index, key: index, }
+              ]
+            : prev
+        );
+      });
+    }
+  }, [didChildrenRender]);
 
   return (
-    <GridContext.Provider value={{ addRow, isRowAdded, updateRow, }}>
-      {children}
+    <GridContext.Provider value={{}}>
+      <div className='flex flex-col w-max gap-2'>
+        {rows.map(v => <InternalRow {...v} />)}
+      </div>
     </GridContext.Provider>
   );
 }
 
 export { Grid, Row, Cell };
-
-/*
-Postnotes
-- It's working
-- Seems like it renders a lot but it just because everything runs twice since react dev mode
-- The subscribing useEffect in the Row is not necessary since the addCell already call it before actually
-- Now that I have the structure created within the grid's map I can start adding useful properties
-*/
