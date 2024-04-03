@@ -1,79 +1,33 @@
 import './App.css';
-import { useTheme } from './providers/Theme/';
-import { TextInput, PasswordInput, Grid, Row, Cell, CheckboxList } from './components/';
-import { useState } from 'react';
-
-type Color = {
-  id: number;
-  name: string;
-  selected: boolean;
-};
+import { Grid, Row, Cell } from './components/';
 
 function App() {
-  const [value, switchTheme] = useTheme();
-  const [colors, setColors] = useState<Color[]>([
-    {
-      id: 0, name: 'yellow', selected: true, 
-    },
-      {
-      id: 1, name: 'red', selected: true, 
-    },
-    {
-      id: 2, name: 'green', selected: false, 
-    },
-  ]);
-  const [input, setInput] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-
   return (
-    <div className='min-h-screen bg-gray-200 dark:bg-gray-900'>
-      <button onClick={switchTheme}>go {value.opposite}</button>
-      <h1 className='text-4xl'>Gallery</h1>
-
-      <div className='flex flex-col gap-4'>
-        <CheckboxList
-        htmlFor='color'
-        list={colors}
-        select={setColors}
-        selectUsing='selected'
-        onChange={(prev, curr, item) => console.log({prev, curr, item})}
-        stateful
-        />
-        <CheckboxList
-        classNames={{ overwriteContainer: 'flex bg-red-100 gap-4 w-max p-4' }}
-        onChange={(prev, curr, item) => console.log({prev, curr, item})}
-        htmlFor='color'
-        list={colors}
-        renderItemAs={(item) => {
-          return (
-            <div className='text-blue-500'>{item.name}</div>  
-          );
-        }}
-        />
+    <div className='min-h-screen bg-gray-200 dark:bg-gray-900 grid place-items-center'>
+      <div className='w-full flex justify-center'>
+        <div className='flex-1 max-w-2xl'>
+          <Grid>
+            <Row>
+              <Cell isleId={1}>A</Cell>
+              <Cell isleId={1}>A</Cell>
+              <Cell isleId={1}>A</Cell>
+              <Cell isleId={1}>A</Cell>
+            </Row>
+            <Row>
+              <Cell isleId={3}>C</Cell>
+              <Cell isleId={2}>B</Cell>
+              <Cell isleId={2}>B</Cell>
+              <Cell isleId={2}>B</Cell>
+            </Row>
+            <Row>
+              <Cell isleId={3}>C</Cell>
+              <Cell isleId={3}>C</Cell>
+              <Cell isleId={2}>B</Cell>
+              <Cell isleId={2}>B</Cell>
+            </Row>
+          </Grid>
+        </div>
       </div>
-      <Grid>
-        <Row>
-          <Cell isleId={1}>this</Cell>
-          <Cell isleId={1}>is</Cell>
-          <Cell isleId={1}>an</Cell>
-          <Cell isleId={1}>isle</Cell>
-        </Row>
-        <Row>
-          <Cell isleId={2}>this</Cell>
-          <Cell isleId={2}>is</Cell>
-          <Cell isleId={2}>another</Cell>
-          <Cell isleId={2}>isle</Cell>
-        </Row>
-      </Grid>
-      <TextInput text={input} setText={setInput} onlyLetters allowSpaces variant='success' />
-      <PasswordInput 
-      password={password}
-      setPassword={setPassword}
-      label='Password here:'
-      variant={password.length === 0 ? 'error' : 'success'}
-      classNames={{ input: 'transition' }}
-      placeholder='very difficult password'
-      />
     </div>
   );
 }
