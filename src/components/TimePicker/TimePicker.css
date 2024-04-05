@@ -1,0 +1,7 @@
+html.dark .TimePicker input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.1);
+}
+
+html.light .TimePicker input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.9);
+}
