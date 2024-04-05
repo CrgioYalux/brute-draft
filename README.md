@@ -2,7 +2,7 @@
 
 ## Components currently working on
 - [Grid](#grid)
-  - [How I'd like to use it](#how-i'd-like-to-use-it)
+  - [How I'd like to use it](#how-i-want-to-use-it)
 
 ## Components done
 - TextInput
@@ -22,7 +22,7 @@
 
 ## Grid
 
-### How I'd like to use it
+### How I want to use it
 
 ```react
 <Grid>
@@ -38,7 +38,7 @@
 </Grid>
 ```
 
-### TODO
+### Some notes
 - Cells should have unique IDs provided by the Row component
 - Rows should have unique IDs provided by the Grid component
 - IDs in Cells and Rows can also work for positioning
@@ -81,3 +81,8 @@
     </Grid>
     // and are the Internal versions the ones actually handling logic
   ```
+
+--- 
+
+# TODO
+- [ ] Implement the rest of datetime-related components
