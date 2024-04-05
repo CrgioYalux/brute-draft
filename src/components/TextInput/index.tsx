@@ -1,5 +1,10 @@
-import { useId } from 'react';
-import { isIncludedIn } from '../utils';
+import {
+	useId,
+} from 'react';
+
+import {
+	isIncludedIn,
+} from '../utils';
 
 const colorSchemes: ColorSchemesByVariant<['span', 'input', 'button']> = {
 	initial: {
@@ -54,7 +59,7 @@ interface TextInputProps extends BruteComponent<
     allow?: string | RegExp;
 	setText: (prev: string) => void;
 	text: string;
-};
+}
 
 const TextInput: React.FC<TextInputProps> = ({
 	classNames,
@@ -105,17 +110,13 @@ const TextInput: React.FC<TextInputProps> = ({
                             .map(isIncludedInOnlyAllow)
                             .filter(Boolean)
                             .length === value.length
-                        ) setText(value);
-                        return;
+                        ) return setText(value);
                     }
                     else if (
 						typeof onlyAllow === 'object' &&
 						(onlyAllow.exec(value) ?? [])
 						.pop() === value
-					) {
-						setText(value);
-                        return;
-                    }
+					) return setText(value);
 
                     const whitelist: string[] = [];
                     allowLetters && whitelist.push(...letters);
@@ -138,8 +139,7 @@ const TextInput: React.FC<TextInputProps> = ({
                         .map(isIncludedInWhitelist)
                         .filter(Boolean)
                         .length === value.length
-                    ) setText(value)
-                    return
+                    ) return setText(value);
                 }}
 			/>
 		</label>

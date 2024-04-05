@@ -15,7 +15,7 @@ const GridContext = createContext<GridContext>({} as GridContext);
 
 interface GridProps {
   children: React.ReactNode;
-};
+}
 
 function Grid({
   children,

@@ -1,4 +1,7 @@
-import { useState, useId } from 'react';
+import {
+    useState,
+    useId,
+} from 'react';
 
 interface CheckboxTypeInputListProps {
     classNames?: BruteClassNames<['container', 'input']>;
@@ -8,7 +11,7 @@ interface CheckboxTypeInputListProps {
     checked?: boolean;
     onChange?: (event: React.SyntheticEvent) => void;
     children?: React.ReactNode;
-};
+}
 
 type StatefulCheckboxListProps<T extends MinimumItemProps> = {
     stateful: true;

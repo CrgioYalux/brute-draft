@@ -1,4 +1,7 @@
-import { useState, useId } from 'react';
+import {
+	useState,
+	useId,
+} from 'react';
 
 import OpenEye from '../Icons/OpenEye';
 import ClosedEye from '../Icons/ClosedEye';
@@ -42,7 +45,7 @@ interface PasswordInputProps extends BruteComponent<
 	variant?: Variant;
 	setPassword: (prev: string) => void;
 	password: string;
-};
+}
 
 const PasswordInput: React.FC<PasswordInputProps> = ({
 	classNames,

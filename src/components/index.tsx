@@ -3,7 +3,11 @@ import TextInput from "./TextInput";
 import Textarea from "./Textarea";
 import DatePicker from "./DatePicker";
 import PasswordInput from "./PasswordInput";
-import { Grid, Row, Cell } from "./Grid";
+import {
+  Grid,
+  Row,
+  Cell,
+} from "./Grid";
 
 export {
   CheckboxList,
@@ -11,5 +15,7 @@ export {
   Textarea,
   DatePicker,
   PasswordInput,
-  Grid, Row, Cell,
+  Grid,
+  Row,
+  Cell,
 };

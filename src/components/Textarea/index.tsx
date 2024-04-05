@@ -1,5 +1,10 @@
-import { useId } from 'react';
-import { isIncludedIn } from '../utils';
+import {
+	useId,
+} from 'react';
+
+import {
+	isIncludedIn,
+} from '../utils';
 
 const colorsByVariant = {
 	initial: {
@@ -35,12 +40,12 @@ const defaultClassNames = (variant: Variant) => ({
 	input: `rounded p-1 resize-none ${colorsByVariant[variant]?.input}`,
     capacity: `absolute bottom-1 right-1 text-sm font-bold opacity-80 ${colorsByVariant[variant]?.capacity}`,
 	button: `w-max ${colorsByVariant[variant]?.button} underline cursor-pointer`,
-})
+});
 
-const letters = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
-const numbers = '0123456789'
-const symbols = '"¡!#$%&\'()*+,-./:;<=>¿?@[\\]^_`{|}~'
-const spaces = ' '
+const letters = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
+const numbers = '0123456789';
+const symbols = '"¡!#$%&\'()*+,-./:;<=>¿?@[\\]^_`{|}~';
+const spaces = ' ';
 
 interface CapacityProps {
     className?: string;
@@ -55,10 +60,10 @@ const Capacity: React.FC<CapacityProps> = ({
     max,
     input,
 }) => {
-    if (!show) return
-    if (max === undefined) return
+    if (!show) return;
+    if (max === undefined) return;
     return <span className={className}>{max - input}</span>
-}
+};
 
 interface TextareaProps extends BruteComponent<
 	HTMLTextAreaElement,
@@ -82,7 +87,7 @@ interface TextareaProps extends BruteComponent<
 }
 
 const Textarea: React.FC<TextareaProps> = ({ 
-	classNames = {},
+	classNames,
 	label = 'Text',
 	variant = 'initial',
     onlyLetters = false,
@@ -100,13 +105,13 @@ const Textarea: React.FC<TextareaProps> = ({
     showCapacity = true,
 	...textareaProps
 }) => {
-	const id = useId()
+	const id = useId();
 
-	const labelClassName = classNames.overwriteLabel ?? `${defaultClassNames(variant)?.label} ${classNames.label ?? ''}`
-	const spanClassName = classNames.overwriteSpan ?? `${defaultClassNames(variant)?.span} ${classNames.span ?? ''}`
-	const textareaClassName = classNames.overwriteTextarea ?? `${defaultClassNames(variant)?.textarea} ${classNames.textarea ?? ''}`
-	const inputClassName = classNames.overwriteInput ?? `${defaultClassNames(variant)?.input} ${classNames.input ?? ''}`
-	const capacityClassName = classNames.overwriteCapacity ?? `${defaultClassNames(variant)?.capacity} ${classNames.capacity ?? ''}`
+	const labelClassName = classNames?.overwriteLabel ?? `${defaultClassNames(variant)?.label} ${classNames?.label ?? ''}`;
+	const spanClassName = classNames?.overwriteSpan ?? `${defaultClassNames(variant)?.span} ${classNames?.span ?? ''}`;
+	const textareaClassName = classNames?.overwriteTextarea ?? `${defaultClassNames(variant)?.textarea} ${classNames?.textarea ?? ''}`;
+	const inputClassName = classNames?.overwriteInput ?? `${defaultClassNames(variant)?.input} ${classNames?.input ?? ''}`;
+	const capacityClassName = classNames?.overwriteCapacity ?? `${defaultClassNames(variant)?.capacity} ${classNames?.capacity ?? ''}`;
 
 	return (
 		<label className={labelClassName} htmlFor={id}>
@@ -133,17 +138,13 @@ const Textarea: React.FC<TextareaProps> = ({
                                 .map(isIncludedInOnlyAllow)
                                 .filter(Boolean)
                                 .length === value.length
-                            ) setText(value);
-                            return;
+                            ) return setText(value);
                         }
                         else if (
                             typeof onlyAllow === 'object' &&
                             (onlyAllow.exec(value) ?? [])
                             .pop() === value
-                        ) {
-                            setText(value);
-                            return;
-                        }
+                        ) return setText(value);
 
                         const whitelist: string[] = [];
                         allowLetters && whitelist.push(...letters);
@@ -166,8 +167,7 @@ const Textarea: React.FC<TextareaProps> = ({
                             .map(isIncludedInWhitelist)
                             .filter(Boolean)
                             .length === value.length
-                        ) setText(value)
-                        return
+                        ) setText(value);
                     }}
                 />
                 <Capacity 
@@ -179,6 +179,6 @@ const Textarea: React.FC<TextareaProps> = ({
             </div>
 		</label>
 	)
-}
+};
 
-export default Textarea
+export default Textarea;
