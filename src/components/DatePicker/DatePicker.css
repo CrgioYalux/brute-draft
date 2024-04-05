@@ -1,0 +1,7 @@
+html.dark .DatePicker input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.1);
+}
+
+html.light .DatePicker input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.9);
+}
