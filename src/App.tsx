@@ -1,7 +1,13 @@
 import './App.css';
-import { Grid, Row, Cell } from './components/';
+import { Grid, Row, Cell, DatePicker, } from './components/';
+
+import { useState } from 'react';
+import { useTheme } from './providers/Theme';
 
 function App() {
+  const [date, setDate] = useState<string>('');
+  const [, switchTheme] = useTheme();
+
   return (
     <div className='min-h-screen bg-gray-200 dark:bg-gray-900 grid place-items-center'>
       <div className='w-full flex justify-center'>
@@ -28,6 +34,9 @@ function App() {
           </Grid>
         </div>
       </div>
+      <DatePicker date={date} setDate={setDate} defaultValueToCurrentDate />
+      {date}
+      <button onClick={switchTheme}> switch theme </button>
     </div>
   );
 }
