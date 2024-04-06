@@ -55,10 +55,15 @@ function formatDateToUseAsPropValue(date: Date | string): string {
     return (new Date(date)).toJSON().substring(0, 10);
 }
 
+function formatDateTimeToUseAsPropValue(date: Date | string): string {
+    return (new Date(date)).toJSON().substring(0, 16);
+}
+
 export {
     isIncludedIn,
     getCurrentDateTimeToJSON,
     getCurrentDateToJSON,
     getCurrentTimeToJSON,
     formatDateToUseAsPropValue,
+    formatDateTimeToUseAsPropValue,
 };
