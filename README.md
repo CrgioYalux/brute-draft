@@ -2,27 +2,26 @@
 
 ## Components currently working on
 - [Grid](#grid)
-  - [How I'd like to use it](#how-i-want-to-use-it)
+  - [How I want to use it](#how-i-want-to-use-it)
 
 ## Components done
-- TextInput
-- PasswordInput
 - CheckboxList
+- PasswordInput
+- TextInput
+- TextArea
+- DatePicker
+- TimePicker
+- DateTimePicker
 
 ## Components which are not done but are pretty defined already
-- TextArea
-- DateTimeInput
-- DateInput
-- TimeInput
-- CurrencyInput
 
 ---
 
-# Concepts
+## Concepts
 
-## Grid
+### Grid
 
-### How I want to use it
+#### How I want to use it
 
 ```react
 <Grid>
@@ -38,7 +37,7 @@
 </Grid>
 ```
 
-### Some notes
+#### Some notes
 - Cells should have unique IDs provided by the Row component
 - Rows should have unique IDs provided by the Grid component
 - IDs in Cells and Rows can also work for positioning
@@ -56,7 +55,7 @@
   - The External is provided to the user to define the visual structure
   - Each parent (Grid and Row) takes its children, passed in their External version, maps them to extract the passed props into a list state, and finally renders their equivalent using the Internal version.
   I.E.
-  ```react
+  ```jsx
     // the user describes
     <Grid>
       <Row>
@@ -84,5 +83,4 @@
 
 --- 
 
-# TODO
-- [ ] Implement the rest of datetime-related components
+## TODO
