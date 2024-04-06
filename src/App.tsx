@@ -1,11 +1,13 @@
 import './App.css';
-import { Grid, Row, Cell, DatePicker, } from './components/';
+import { Grid, Row, Cell, DatePicker, TimePicker, DateTimePicker, } from './components/';
 
 import { useState } from 'react';
 import { useTheme } from './providers/Theme';
 
 function App() {
   const [date, setDate] = useState<string>('');
+  const [time, setTime] = useState<string>('');
+  const [dateTime, setDateTime] = useState<string>('');
   const [, switchTheme] = useTheme();
 
   return (
@@ -35,6 +37,8 @@ function App() {
         </div>
       </div>
       <DatePicker date={date} setDate={setDate} defaultValueToCurrentDate />
+      <TimePicker time={time} setTime={setTime} defaultValueToCurrentTime />
+      <DateTimePicker variant='warning' dateTime={dateTime} setDateTime={setDateTime} defaultValueToCurrentDateTime />
       {date}
       <button onClick={switchTheme}> switch theme </button>
     </div>
