@@ -2,6 +2,7 @@ import CheckboxList from "./CheckboxList";
 import TextInput from "./TextInput";
 import Textarea from "./Textarea";
 import DatePicker from "./DatePicker";
+import TimePicker from "./TimePicker";
 import PasswordInput from "./PasswordInput";
 import {
   Grid,
@@ -14,6 +15,7 @@ export {
   TextInput,
   Textarea,
   DatePicker,
+  TimePicker,
   PasswordInput,
   Grid,
   Row,

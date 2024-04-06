@@ -15,10 +15,10 @@ type RemoveField<Type, Field extends string> = {
 
 /* Component-Specific */
 
-type ClassName<T extends string> = T | `overwrite${UppercaseFirstLetter<T>}`;
+type BruteClassName<T extends string> = T | `overwrite${UppercaseFirstLetter<T>}`;
 
 type BruteClassNames<T extends string[]> = {
-    [K in ClassName<T[number]>]?: string;
+    [K in BruteClassName<T[number]>]?: string;
 };
 
 type MinimumItemProps = {

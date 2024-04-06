@@ -10,7 +10,7 @@ import {
 	formatDateToUseAsPropValue,
 } from '../utils';
 
-const colorsByVariant = {
+const colorsByVariant: ColorSchemesByVariant<['span', 'input', 'button']> = {
 	initial: {
 		span: 'text-black dark:text-white',
 		input: 'bg-indigo-800 dark:bg-indigo-200 text-indigo-200 dark:text-indigo-800',
