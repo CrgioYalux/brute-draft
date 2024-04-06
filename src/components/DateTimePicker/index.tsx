@@ -71,7 +71,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
 	const inputClassName = classNames?.overwriteInput ?? `${defaultClassNames(variant)?.input} ${classNames?.input ?? ''}`
 	const buttonClassName = classNames?.overwriteButton ?? `${defaultClassNames(variant)?.button} ${classNames?.button ?? ''}`
 
-    const setDateTimeToCurrent = () => {
+    const setDateTimeToCurrent = (): void => {
         setDateTime(getCurrentDateTimeToJSON());
     };
 
