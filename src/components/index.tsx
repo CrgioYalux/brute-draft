@@ -5,6 +5,8 @@ import DatePicker from './DatePicker';
 import TimePicker from './TimePicker';
 import DateTimePicker from './DateTimePicker';
 import PasswordInput from './PasswordInput';
+import Switcher from './Switcher';
+
 import {
   Grid,
   Row,
@@ -19,6 +21,7 @@ export {
   TimePicker,
   DateTimePicker,
   PasswordInput,
+  Switcher,
   Grid,
   Row,
   Cell,
