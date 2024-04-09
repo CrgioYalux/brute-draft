@@ -5,6 +5,7 @@ import DatePicker from './DatePicker';
 import TimePicker from './TimePicker';
 import DateTimePicker from './DateTimePicker';
 import PasswordInput from './PasswordInput';
+import GenericRadioInputList from './GenericRadioInputList';
 import Switcher from './Switcher';
 
 import {
@@ -22,6 +23,7 @@ export {
   DateTimePicker,
   PasswordInput,
   Switcher,
+  GenericRadioInputList,
   Grid,
   Row,
   Cell,
