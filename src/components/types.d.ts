@@ -13,6 +13,8 @@ type RemoveField<Type, Field extends string> = {
 	[Property in keyof Type as Exclude<Property, Field>]: Type[Property];
 };
 
+type AppendOrOverride<T, M> = Omit<T, keyof M> & M;
+
 /* Component-Specific */
 
 type BruteClassName<T extends string> = T | `overwrite${UppercaseFirstLetter<T>}`;
@@ -29,10 +31,13 @@ type MinimumItemProps = {
 const Variants = ['initial', 'success', 'error', 'warning'] as const;
 type Variant = typeof Variants[number];
 
-type BruteComponent<HTMLElement, ClassNames extends string[]> = RemoveField<
-    React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLElement>, HTMLElement>,
-    'className'
-> & { classNames?: BruteClassNames<ClassNames> };
+type BruteComponent<HTMLElement, ClassNames extends string[], Props = {}> = 
+    AppendOrOverride<
+        RemoveField<
+            React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLElement>, HTMLElement>,
+            'className'
+        > & { classNames?: BruteClassNames<ClassNames> },
+    Props>;
 
 type ColorSchemesByVariant<Elements extends string[]> = {
     [Key in Variant]: {
