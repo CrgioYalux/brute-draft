@@ -1,4 +1,13 @@
-# Brute
+# Brute (placeholder)
+Atomically-defined, molecularly-linked, logic first components
+
+## Philosophy
+- There's atomic components and molecular components.
+  The former are used as building blocks for defining the latter.
+- As a component's atomicity increases, its use cases also increases.
+  - The range of scenarios in which you can apply that component is wider.
+  - This has a direct impact on the amount of properties and generics these components receive
+    as they are expected to be used in the creation of the molecule components.
 
 ## Components currently working on
 - [Grid](#grid)
@@ -12,8 +21,23 @@
 - DatePicker
 - TimePicker
 - DateTimePicker
+- Switcher
+- GenericRadioInputList
 
 ## Components which are not done but are pretty defined already
+
+## Components that should be re-visited
+- CheckboxList
+  - Since `<GenericRadioInputList>` implementation, there's things I'd like to also implement in
+    the `<CheckboxList>` component starting by allowing a full-generic use instead of forcing the user
+    to extend their types to implement the MinimumItemProps type.
+- Switcher 
+  - Given that the `<GenericRadioInputList>` component's implementation offers a wider API that feels
+  like a superset of what the `<Switcher>` component allows, maybe the former could be defined using the latter,
+  enforcing, this way, the philosophy of libray.
+
+## Components that lack an actual use case
+- Grid (sadly)
 
 ---
 
@@ -80,7 +104,14 @@
     </Grid>
     // and are the Internal versions the ones actually handling logic
   ```
+  - Maybe this component could implement a way of declaratively defining a grid, but that at the end gets
+  rendered as a list of cells which are siblings; no hierarchy, like when using InteralRow.
+    - And maybe the whole point of the component could be that it generates the css for showing that
+    list of siblings-cells as the declaratevely-defined grid.
+    - This could allow to do interesintg animations that, by other way, I wouldn't know how to do,
+    nor I know if they would be feasible; e.g. displace and rotate isles, and do it smoothly-animated
 
 --- 
 
 ## TODO
+- [ ] Re-think all components defined up to date following the library philosophy.
